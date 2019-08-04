@@ -84,7 +84,7 @@ public class Reflections {
                         try {
                             ALL_CLASSES.add(Class.forName(className));
                         } catch (final Throwable e) {
-                            LOG.info("Error: " + e.getMessage());
+                            LOG.fine("Error: " + e.getMessage());
                         }
                     }
                 });
@@ -384,7 +384,7 @@ public class Reflections {
         try {
             return Stream.of(clazz.getMethods()).filter(m -> Stream.of(annotationClasses).anyMatch(m::isAnnotationPresent)).collect(Collectors.toSet());
         } catch (final Throwable e) {
-            LOG.log(Level.SEVERE, "Error finding " + annotationClasses + " annotation methods on class: " + clazz, e);
+            LOG.fine("Error finding " + annotationClasses + " annotation methods on class: " + clazz + " -> " + e.getLocalizedMessage());
             return Collections.emptySet();
         }
     }
